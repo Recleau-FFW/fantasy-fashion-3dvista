@@ -1,0 +1,12 @@
+@font-face {
+   font-family: "Avenir LT Std 65 Medium";
+   src: url("fonts/AvenirLTStd-Black.woff") format("woff"), url("fonts/AvenirLTStd-Black.eot") format("embedded-opentype"), url("fonts/AvenirLTStd-Black.otf") format("opentype");
+   font-weight: normal;
+   font-style: normal;
+}
+@font-face {
+   font-family: "Avenir LT Std 55 Roman";
+   src: url("fonts/AvenirLTStd-Roman.woff") format("woff"), url("fonts/AvenirLTStd-Roman.eot") format("embedded-opentype"), url("fonts/AvenirLTStd-Roman.otf") format("opentype");
+   font-weight: normal;
+   font-style: normal;
+}
