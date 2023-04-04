@@ -6,22 +6,22 @@
     <meta name="viewport" id="metaViewport" content="user-scalable=no, initial-scale=1, width=device-width, viewport-fit=cover" data-tdv-general-scale="0.5"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <script src="lib/tdvplayer.js?v=1678477565367"></script>
-    <link rel="preload" href="locale/en.txt?v=1678477565367" as="fetch" crossorigin="anonymous"/>
-	<link rel="preload" href="script.js?v=1678477565367" as="script"/>
-	<link rel="preload" href="media/panorama_3F7269EE_3356_1D86_41BB_3489DB9A11AF_0/r/3/0_0.jpg?v=1678477565367" as="image"/>
-	<link rel="preload" href="media/panorama_3F7269EE_3356_1D86_41BB_3489DB9A11AF_0/l/3/0_0.jpg?v=1678477565367" as="image"/>
-	<link rel="preload" href="media/panorama_3F7269EE_3356_1D86_41BB_3489DB9A11AF_0/u/3/0_0.jpg?v=1678477565367" as="image"/>
-	<link rel="preload" href="media/panorama_3F7269EE_3356_1D86_41BB_3489DB9A11AF_0/d/3/0_0.jpg?v=1678477565367" as="image"/>
-	<link rel="preload" href="media/panorama_3F7269EE_3356_1D86_41BB_3489DB9A11AF_0/f/3/0_0.jpg?v=1678477565367" as="image"/>
-	<link rel="preload" href="media/panorama_3F7269EE_3356_1D86_41BB_3489DB9A11AF_0/b/3/0_0.jpg?v=1678477565367" as="image"/>
+    <script src="lib/tdvplayer.js?v=1680634216636"></script>
+    <link rel="preload" href="locale/en.txt?v=1680634216636" as="fetch" crossorigin="anonymous"/>
+	<link rel="preload" href="script.js?v=1680634216636" as="script"/>
+	<link rel="preload" href="media/panorama_39F34329_3978_83B7_41BA_A1C48F45BF20_0/r/3/0_0.jpg?v=1680634216636" as="image"/>
+	<link rel="preload" href="media/panorama_39F34329_3978_83B7_41BA_A1C48F45BF20_0/l/3/0_0.jpg?v=1680634216636" as="image"/>
+	<link rel="preload" href="media/panorama_39F34329_3978_83B7_41BA_A1C48F45BF20_0/u/3/0_0.jpg?v=1680634216636" as="image"/>
+	<link rel="preload" href="media/panorama_39F34329_3978_83B7_41BA_A1C48F45BF20_0/d/3/0_0.jpg?v=1680634216636" as="image"/>
+	<link rel="preload" href="media/panorama_39F34329_3978_83B7_41BA_A1C48F45BF20_0/f/3/0_0.jpg?v=1680634216636" as="image"/>
+	<link rel="preload" href="media/panorama_39F34329_3978_83B7_41BA_A1C48F45BF20_0/b/3/0_0.jpg?v=1680634216636" as="image"/>
     <link rel="icon" type="image/x-icon" href="media/favicon.ico">
 	<meta name="description" content="Virtual Tour"/>
 	<meta name="theme-color" content="#000000"/>
-    <script src="script.js?v=1678477565367"></script>
+    <script src="script.js?v=1680634216636"></script>
     <script type="text/javascript">
         var tour;
-        var devicesUrl = {"general":"script_general.js?v=1678477565367","mobile":"script_mobile.js?v=1678477565367"};
+        var devicesUrl = {"mobile":"script_mobile.js?v=1680634216636","general":"script_general.js?v=1680634216636"};
 
         (function()
         {
@@ -64,9 +64,9 @@
 
             var settings = new TDV.PlayerSettings();
             settings.set(TDV.PlayerSettings.CONTAINER, document.getElementById('viewer'));
-            settings.set(TDV.PlayerSettings.WEBVR_POLYFILL_URL, 'lib/WebVRPolyfill.js?v=1678477565367');
-            settings.set(TDV.PlayerSettings.HLS_URL, 'lib/Hls.js?v=1678477565367');
-            settings.set(TDV.PlayerSettings.QUERY_STRING_PARAMETERS, 'v=1678477565367');
+            settings.set(TDV.PlayerSettings.WEBVR_POLYFILL_URL, 'lib/WebVRPolyfill.js?v=1680634216636');
+            settings.set(TDV.PlayerSettings.HLS_URL, 'lib/Hls.js?v=1680634216636');
+            settings.set(TDV.PlayerSettings.QUERY_STRING_PARAMETERS, 'v=1680634216636');
 
             tour = new TDV.Tour(settings, devicesUrl);
             tour.bind(TDV.Tour.EVENT_TOUR_INITIALIZED, onVirtualTourInit);
@@ -243,10 +243,6 @@
         
 
         function playVideo(video, autoplayMuted, clickComponent) {
-            function isSafariDesktopV11orGreater() {
-                return /^((?!chrome|android|crios|ipad|iphone).)*safari/i.test(navigator.userAgent) && parseFloat(/Version\/([0-9]+\.[0-9]+)/i.exec(navigator.userAgent)[1]) >= 11;
-            }
-
             function hasAudio (video) {
                 return video.mozHasAudio ||
                        Boolean(video.webkitAudioDecodedByteCount) ||
@@ -282,34 +278,27 @@
                 clickComponent.style.visibility = visible ? 'visible' : 'hidden';
             }
 
-            if (isSafariDesktopV11orGreater()) {
-                if(autoplayMuted) {
-                    video.muted = true;
-                    video.play();
-                }
-            } else {
-                var canPlay = true;
-                var promise = video.play();
-                if (promise) {
-                    promise.catch(function() {
-                        if(clickComponent)
-                            setComponentVisibility(true);
-                        canPlay = false;
-                        if(autoplayMuted) {
-                            video.muted = true;
-                            video.play();
-                        }
-                        detectUserAction();
-                    });
-                } else {
+            var canPlay = true;
+            var promise = video.play();
+            if (promise) {
+                promise.catch(function() {
+                    if(clickComponent)
+                        setComponentVisibility(true);
                     canPlay = false;
-                }
-
-                if (!canPlay || video.muted) {
+                    if(autoplayMuted) {
+                        video.muted = true;
+                        video.play();
+                    }
                     detectUserAction();
-                } else if(clickComponent) {
-                    setComponentVisibility(false);
-                }
+                });
+            } else {
+                canPlay = false;
+            }
+
+            if (!canPlay || video.muted) {
+                detectUserAction();
+            } else if(clickComponent) {
+                setComponentVisibility(false);
             }
         }
 
@@ -332,10 +321,10 @@
         #viewer { z-index:1; }
         #preloadContainer { z-index:2; opacity:0; background-color:rgba(0,0,0,1); transition: opacity 0.5s; -webkit-transition: opacity 0.5s; -moz-transition: opacity 0.5s; -o-transition: opacity 0.5s;}
     </style>
-    <link rel="stylesheet" href="fonts.css?v=1678477565367">
+    <link rel="stylesheet" href="fonts.css?v=1680634216636">
 </head>
 <body>
-    <div id="preloadContainer" class="fill-viewport"><div style="z-index: 4; position: absolute; left: 0%; top: 50%; width: 100.00%; height: 10.00%" ><div style="text-align:left; color:#000; "><DIV STYLE="text-align:center;font-size:1.6666666666666663vmin;"><SPAN STYLE="display:inline-block; letter-spacing:0vmin; white-space:pre-wrap;color:#777777;font-size:1.67vmin;word-break:break-word;font-family:Arial, Helvetica, sans-serif;">Loading virtual tour. Please wait...</SPAN></DIV></div></div></div>
+    <div id="preloadContainer" class="fill-viewport"><div style="z-index: 4; position: absolute; overflow: hidden; left: 0%; top: 50%; width: 100.00%; height: 10.00%" ><div style="text-align:left; color:#000; "><DIV STYLE="text-align:center;font-size:1.6666666666666663vmin;"><SPAN STYLE="display:inline-block; letter-spacing:0vmin; white-space:pre-wrap;color:#777777;font-size:1.67vmin;font-family:Arial, Helvetica, sans-serif;">Loading virtual tour. Please wait...</SPAN></DIV></div></div></div>
     <div id="viewer" class="fill-viewport"></div>
 </body>
 </html>
